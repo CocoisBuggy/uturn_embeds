@@ -1,7 +1,6 @@
-import { embeds } from "./embeds.js";
-import "./style.css";
+import { embeds } from "./embeds";
 
-const list = document.querySelector("#embed-list");
+const list = document.querySelector("#embed-list")!;
 for (const name of embeds) {
   const li = document.createElement("li");
   li.className = "embed-item";
