@@ -21,6 +21,7 @@ For elements with more than a few Tailwind classes, use the shared `classNames` 
 - **Single-file build**: `vite-plugin-singlefile` inlines every asset into one HTML per page, and `base: "./"` is set. Internal links must be relative (e.g. `./${name}/` in the gallery) — no root-absolute paths.
 - **Tailwind v4, no config file**: wiring is only the `@tailwindcss/vite` plugin + `@import "tailwindcss";` at the top of `src/styles.css`. No `tailwind.config.*`.
 - **`@` alias** in code resolves to repo root.
+- **State management**: use `@preact/signals-core` (`signal`, `computed`) for state, NOT other frameworks' reactivity or manual DOM mutation. Collect signals in a `src/state.ts` per embed; call `invalidate()` to manually bump a version signal when driving non-reactive structures that need a re-render.
 - **tsconfig `include` is explicit**: `["src", "files/src", "directories/src"]`. A new embed's `src/` is only typechecked if it is added here.
 - **Lucide icons**: rendered via `createIcons({ icons })` from `lucide` with `<span data-lucide="...">` placeholders; every used icon must be imported and registered in the `icons` map.
 - **Deploy**: `.github/workflows/deploy.yml` — on push to `main`, `npm ci && npm run build`, deploy `dist/` to GitHub Pages.
