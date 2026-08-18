@@ -5,14 +5,14 @@ Vite multipage static site where each top-level directory is a self-contained "e
 ## Commands
 
 - `npm run dev` — Vite dev server
-- `npm run build` — Vite build (output to `dist/`)
+- `npm run build` — per-page `vite build` via `scripts/build.mjs`; `vite-plugin-singlefile` inlines every asset into one self-contained HTML per page (output to `dist/`). Uses Vite 8 (Rolldown). Build is NOT a single `vite build` pass: singlefile can't code-split with multiple HTML inputs, so each page is built separately.
 - `npm run typecheck` — `tsc --noEmit`
 - `npm run preview` — preview build output
 - No test or lint scripts. Formatting (TS/JSON/Markdown/malva/markup) is `dprint fmt` / `dprint check` per `dprint.json`.
 
 ## Adding an embed
 
-Create a top-level directory `<name>/` containing `index.html` + `src/main.ts` (import `../../src/styles.css`). Do **not** register it anywhere: `vite.config.js` and `src/gallery/embeds.ts` (`import.meta.glob`) auto-discover any top-level dir with an `index.html`. It will appear as `<name>/` in the root gallery (`index.html` → `src/gallery/main.ts`).
+Create a top-level directory `<name>/` containing `index.html` + `src/main.ts` (import `../../src/styles.css`). Do **not** register it anywhere: `scripts/build.mjs` and `src/gallery/embeds.ts` (`import.meta.glob`) auto-discover any top-level dir with an `index.html`. It will appear as `<name>/` in the root gallery (`index.html` → `src/gallery/main.ts`).
 
 For elements with more than a few Tailwind classes, use the shared `classNames` helper (`src/classNames.ts`, import `../../src/classNames`) and put one class per line so class strings don't run together; pass conditional classes as falsy args (e.g. `classNames(base, cond && "hlt")`) instead of string concatenation.
 
