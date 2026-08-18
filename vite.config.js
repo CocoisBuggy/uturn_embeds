@@ -1,3 +1,4 @@
+import tailwindcss from "@tailwindcss/vite";
 import { existsSync, readdirSync } from "node:fs";
 import { resolve } from "path";
 import { defineConfig } from "vite";
@@ -34,6 +35,7 @@ export default defineConfig({
     },
   },
   plugins: [
+    tailwindcss(),
     viteSingleFile({
       useRecommendedBuildConfig: false,
     }),
