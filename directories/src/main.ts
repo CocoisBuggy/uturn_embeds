@@ -1,4 +1,5 @@
 import "../../src/styles.css";
+import "./components.css";
 
 import {
   createIcons,
@@ -66,32 +67,16 @@ const main = document.createElement("div");
 main.className = "relative flex h-full w-full flex-col p-4";
 
 const mainTitle = document.createElement("h1");
-mainTitle.className = "mb-3 text-xl font-bold text-green-700";
+mainTitle.className = "di-title";
 main.appendChild(mainTitle);
 
 const breadcrumb = document.createElement("nav");
-breadcrumb.className = classNames(
-  "mb-3",
-  "flex",
-  "min-w-0",
-  "flex-wrap",
-  "items-center",
-  "gap-1",
-  "text-sm",
-  "text-slate-500",
-);
+breadcrumb.className = "di-breadcrumb";
 breadcrumb.setAttribute("aria-label", "Breadcrumb");
 main.appendChild(breadcrumb);
 
 const grid = document.createElement("div");
-grid.className = classNames(
-  "grid",
-  "h-full",
-  "auto-rows-max",
-  "grid-cols-2",
-  "gap-3",
-  "overflow-y-auto",
-);
+grid.className = "di-grid";
 grid.addEventListener("dragover", (e: DragEvent) => e.preventDefault());
 grid.addEventListener("drop", (e: DragEvent) => {
   e.preventDefault();
@@ -123,10 +108,7 @@ function renderBreadcrumb(): void {
     const crumb = document.createElement("button");
     crumb.type = "button";
     crumb.className = classNames(
-      "rounded",
-      "px-1",
-      "transition-colors",
-      "hover:text-green-700",
+      "di-crumb",
       i === currentPath.length - 1 ? "font-bold text-green-700" : "text-slate-500",
     );
     crumb.textContent = folder.name;
@@ -141,20 +123,12 @@ function renderBreadcrumb(): void {
 
 function showEmpty(state: string, iconName: string): void {
   const wrap = document.createElement("div");
-  wrap.className = classNames(
-    "col-span-2",
-    "flex",
-    "flex-col",
-    "items-center",
-    "gap-2",
-    "py-10",
-    "text-green-400",
-  );
+  wrap.className = "di-empty";
   const icon = document.createElement("span");
   icon.dataset.lucide = iconName;
-  icon.className = "[&_svg]:h-12 [&_svg]:w-12 [&_svg]:stroke-current";
+  icon.className = "di-empty-icon";
   const text = document.createElement("p");
-  text.className = "text-sm text-slate-500";
+  text.className = "di-empty-text";
   text.textContent = state;
   wrap.append(icon, text);
   grid.appendChild(wrap);
@@ -173,40 +147,16 @@ function renderGrid(): void {
 
 function makeTileContent(icon: string, name: string): HTMLElement {
   const tile = document.createElement("div");
-  tile.className = classNames(
-    "flex",
-    "min-w-0",
-    "items-center",
-    "gap-3",
-    "overflow-hidden",
-    "rounded-xl",
-    "border",
-    "border-green-200",
-    "bg-white",
-    "p-3",
-  );
+  tile.className = "di-tile";
 
   const iconWrap = document.createElement("span");
-  iconWrap.className = classNames(
-    "flex",
-    "h-16",
-    "w-16",
-    "shrink-0",
-    "items-center",
-    "justify-center",
-    "rounded-lg",
-    "bg-green-100",
-    "text-green-700",
-    "[&_svg]:h-9",
-    "[&_svg]:w-9",
-    "[&_svg]:stroke-current",
-  );
+  iconWrap.className = "di-tile-icon";
   const iconEl = document.createElement("span");
   iconEl.dataset.lucide = icon;
   iconWrap.appendChild(iconEl);
 
   const nameEl = document.createElement("span");
-  nameEl.className = "truncate text-sm text-slate-700";
+  nameEl.className = "di-tile-name";
   nameEl.textContent = name;
 
   tile.append(iconWrap, nameEl);

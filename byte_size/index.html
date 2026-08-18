@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Byte Size</title>
+    <style>
+    :root {
+      --bs-grid: rgba(22, 163, 74, 0.14);
+      --bs-grid-strong: rgba(22, 163, 74, 0.5);
+      --bs-box: #16a34a;
+      --bs-cell: #6ee7b7;
+    }
+
+    @keyframes bs-zoom-in {
+      0% {
+        opacity: 0;
+        transform: scale(1.12) translateY(10px);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    @keyframes bs-zoom-out {
+      0% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(0.88) translateY(-10px);
+      }
+    }
+
+    .bs-stage.bs-in {
+      animation: bs-zoom-in 300ms ease-out both;
+    }
+
+    .bs-stage.bs-out {
+      animation: bs-zoom-out 260ms ease-in both;
+    }
+    </style>
+  </head>
+  <body class="flex min-h-dvh w-full flex-col items-center justify-center gap-4 overflow-auto bg-green-50 p-4 font-sans text-slate-800 antialiased">
+    <h1 class="text-sm font-semibold tracking-[0.2em] text-green-700 uppercase">
+      Bytes Per Kilo · Mega · Giga
+    </h1>
+
+    <div
+      id="selector"
+      class="flex items-center gap-1 rounded-full border border-green-200 bg-white p-1 shadow-sm"
+    >
+    </div>
+
+    <div class="bs-stage relative aspect-square w-[min(62vw,55dvh,20rem)] max-w-full">
+      <canvas
+        id="grid"
+        width="512"
+        height="512"
+        class="block h-full w-full"
+      ></canvas>
+
+      <div
+        id="cell-label"
+        class="absolute top-[2%] left-[2%] rounded-md bg-white/80 px-2 py-1 text-[11px] font-semibold text-green-700 shadow-sm backdrop-blur"
+      >
+      </div>
+
+      <div
+        id="grid-label"
+        class="absolute right-[2%] bottom-[2%] rounded-md bg-white/80 px-2 py-1 text-[11px] font-semibold text-slate-600 shadow-sm backdrop-blur"
+      >
+      </div>
+    </div>
+
+    <div
+      id="summary"
+      class="flex flex-wrap items-center justify-center gap-x-3 gap-y-1"
+    >
+      <span
+        id="count"
+        class="min-w-[8rem] text-center font-mono text-xl font-extrabold text-green-700 tabular-nums"
+      ></span>
+      <span id="equiv" class="text-sm font-medium text-slate-500"></span>
+    </div>
+
+    <script type="module" src="./src/main.ts"></script>
+  </body>
+</html>

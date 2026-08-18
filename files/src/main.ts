@@ -1,4 +1,5 @@
 import "../../src/styles.css";
+import "./components.css";
 
 import {
   createIcons,
@@ -11,7 +12,6 @@ import {
   Image,
   Music,
 } from "lucide";
-import { classNames } from "../../src/classNames";
 
 interface FileEntry {
   name: string;
@@ -37,49 +37,25 @@ function splitExtension(filename: string): { base: string; ext: string } {
 const floor = document.querySelector<HTMLElement>(".floor")!;
 
 const grid = document.createElement("div");
-grid.className = "grid h-full grid-cols-2 grid-rows-3 gap-3 p-4";
+grid.className = "fl-grid";
 
 for (const file of files) {
   const tile = document.createElement("div");
-  tile.className = classNames(
-    "flex",
-    "min-w-0",
-    "items-center",
-    "gap-3",
-    "overflow-hidden",
-    "rounded-xl",
-    "border",
-    "border-green-200",
-    "bg-white",
-    "p-3",
-  );
+  tile.className = "fl-tile";
 
   const iconWrap = document.createElement("span");
-  iconWrap.className = classNames(
-    "flex",
-    "h-16",
-    "w-16",
-    "shrink-0",
-    "items-center",
-    "justify-center",
-    "rounded-lg",
-    "bg-green-100",
-    "text-green-700",
-    "[&_svg]:h-9",
-    "[&_svg]:w-9",
-    "[&_svg]:stroke-current",
-  );
+  iconWrap.className = "fl-tile-icon";
   const icon = document.createElement("span");
   icon.dataset.lucide = file.icon;
   iconWrap.appendChild(icon);
 
   const nameEl = document.createElement("span");
-  nameEl.className = "truncate text-sm text-slate-700";
+  nameEl.className = "fl-tile-name";
   const { base, ext } = splitExtension(file.name);
 
   const baseEl = document.createTextNode(base);
   const extEl = document.createElement("span");
-  extEl.className = "font-bold text-green-600";
+  extEl.className = "fl-tile-ext";
   extEl.textContent = ext;
 
   nameEl.append(baseEl, extEl);

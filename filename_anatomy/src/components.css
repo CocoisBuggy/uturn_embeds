@@ -1,0 +1,25 @@
+@reference "../../src/styles.css";
+
+.fa-grid {
+  @apply grid grid-cols-[7rem_11rem_2rem_9rem] grid-rows-[auto_auto_auto] gap-x-1 gap-y-3;
+}
+
+.fa-icon {
+  @apply flex h-16 w-20 items-center justify-center justify-self-center rounded-2xl border-2 border-dashed border-green-300 bg-white text-green-600 [&_svg]:h-9 [&_svg]:w-9 [&_svg]:stroke-current;
+}
+
+.fa-name {
+  @apply self-center truncate font-mono text-lg font-semibold text-slate-800;
+}
+
+.fa-dot {
+  @apply self-center text-center font-mono text-2xl font-extrabold text-rose-500;
+}
+
+.fa-type {
+  @apply self-center justify-self-start min-w-0 truncate font-mono text-lg font-bold text-green-600;
+}
+
+.fa-pill {
+  @apply rounded-full border border-green-300 bg-white px-2.5 py-0.5 text-[11px] font-semibold tracking-wide text-green-700;
+}
