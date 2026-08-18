@@ -11,6 +11,7 @@ import {
   Image,
   Music,
 } from "lucide";
+import { classNames } from "../../src/classNames";
 
 interface FileEntry {
   name: string;
@@ -40,11 +41,34 @@ grid.className = "grid h-full grid-cols-2 grid-rows-3 gap-3 p-4";
 
 for (const file of files) {
   const tile = document.createElement("div");
-  tile.className = "flex min-w-0 items-center gap-3 overflow-hidden rounded-xl border border-green-200 bg-white p-3";
+  tile.className = classNames(
+    "flex",
+    "min-w-0",
+    "items-center",
+    "gap-3",
+    "overflow-hidden",
+    "rounded-xl",
+    "border",
+    "border-green-200",
+    "bg-white",
+    "p-3",
+  );
 
   const iconWrap = document.createElement("span");
-  iconWrap.className =
-    "flex h-16 w-16 shrink-0 items-center justify-center rounded-lg bg-green-100 text-green-700 [&_svg]:h-9 [&_svg]:w-9 [&_svg]:stroke-current";
+  iconWrap.className = classNames(
+    "flex",
+    "h-16",
+    "w-16",
+    "shrink-0",
+    "items-center",
+    "justify-center",
+    "rounded-lg",
+    "bg-green-100",
+    "text-green-700",
+    "[&_svg]:h-9",
+    "[&_svg]:w-9",
+    "[&_svg]:stroke-current",
+  );
   const icon = document.createElement("span");
   icon.dataset.lucide = file.icon;
   iconWrap.appendChild(icon);

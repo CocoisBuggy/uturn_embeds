@@ -14,6 +14,8 @@ Vite multipage static site where each top-level directory is a self-contained "e
 
 Create a top-level directory `<name>/` containing `index.html` + `src/main.ts` (import `../../src/styles.css`). Do **not** register it anywhere: `vite.config.js` and `src/gallery/embeds.ts` (`import.meta.glob`) auto-discover any top-level dir with an `index.html`. It will appear as `<name>/` in the root gallery (`index.html` → `src/gallery/main.ts`).
 
+For elements with more than a few Tailwind classes, use the shared `classNames` helper (`src/classNames.ts`, import `../../src/classNames`) and put one class per line so class strings don't run together; pass conditional classes as falsy args (e.g. `classNames(base, cond && "hlt")`) instead of string concatenation.
+
 ## Architecture / gotchas
 
 - **Single-file build**: `vite-plugin-singlefile` inlines every asset into one HTML per page, and `base: "./"` is set. Internal links must be relative (e.g. `./${name}/` in the gallery) — no root-absolute paths.

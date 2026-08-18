@@ -13,6 +13,7 @@ import {
   Image,
   Music,
 } from "lucide";
+import { classNames } from "../../src/classNames";
 
 type FileIcon = string;
 
@@ -69,12 +70,28 @@ mainTitle.className = "mb-3 text-xl font-bold text-green-700";
 main.appendChild(mainTitle);
 
 const breadcrumb = document.createElement("nav");
-breadcrumb.className = "mb-3 flex min-w-0 flex-wrap items-center gap-1 text-sm text-slate-500";
+breadcrumb.className = classNames(
+  "mb-3",
+  "flex",
+  "min-w-0",
+  "flex-wrap",
+  "items-center",
+  "gap-1",
+  "text-sm",
+  "text-slate-500",
+);
 breadcrumb.setAttribute("aria-label", "Breadcrumb");
 main.appendChild(breadcrumb);
 
 const grid = document.createElement("div");
-grid.className = "grid h-full auto-rows-max grid-cols-2 gap-3 overflow-y-auto";
+grid.className = classNames(
+  "grid",
+  "h-full",
+  "auto-rows-max",
+  "grid-cols-2",
+  "gap-3",
+  "overflow-y-auto",
+);
 grid.addEventListener("dragover", (e: DragEvent) => e.preventDefault());
 grid.addEventListener("drop", (e: DragEvent) => {
   e.preventDefault();
@@ -105,8 +122,13 @@ function renderBreadcrumb(): void {
     }
     const crumb = document.createElement("button");
     crumb.type = "button";
-    crumb.className = "rounded px-1 transition-colors hover:text-green-700"
-      + (i === currentPath.length - 1 ? " font-bold text-green-700" : " text-slate-500");
+    crumb.className = classNames(
+      "rounded",
+      "px-1",
+      "transition-colors",
+      "hover:text-green-700",
+      i === currentPath.length - 1 ? "font-bold text-green-700" : "text-slate-500",
+    );
     crumb.textContent = folder.name;
     crumb.addEventListener("click", () => {
       currentPath.length = i + 1;
@@ -119,7 +141,15 @@ function renderBreadcrumb(): void {
 
 function showEmpty(state: string, iconName: string): void {
   const wrap = document.createElement("div");
-  wrap.className = "col-span-2 flex flex-col items-center gap-2 py-10 text-green-400";
+  wrap.className = classNames(
+    "col-span-2",
+    "flex",
+    "flex-col",
+    "items-center",
+    "gap-2",
+    "py-10",
+    "text-green-400",
+  );
   const icon = document.createElement("span");
   icon.dataset.lucide = iconName;
   icon.className = "[&_svg]:h-12 [&_svg]:w-12 [&_svg]:stroke-current";
@@ -143,11 +173,34 @@ function renderGrid(): void {
 
 function makeTileContent(icon: string, name: string): HTMLElement {
   const tile = document.createElement("div");
-  tile.className = "flex min-w-0 items-center gap-3 overflow-hidden rounded-xl border border-green-200 bg-white p-3";
+  tile.className = classNames(
+    "flex",
+    "min-w-0",
+    "items-center",
+    "gap-3",
+    "overflow-hidden",
+    "rounded-xl",
+    "border",
+    "border-green-200",
+    "bg-white",
+    "p-3",
+  );
 
   const iconWrap = document.createElement("span");
-  iconWrap.className =
-    "flex h-16 w-16 shrink-0 items-center justify-center rounded-lg bg-green-100 text-green-700 [&_svg]:h-9 [&_svg]:w-9 [&_svg]:stroke-current";
+  iconWrap.className = classNames(
+    "flex",
+    "h-16",
+    "w-16",
+    "shrink-0",
+    "items-center",
+    "justify-center",
+    "rounded-lg",
+    "bg-green-100",
+    "text-green-700",
+    "[&_svg]:h-9",
+    "[&_svg]:w-9",
+    "[&_svg]:stroke-current",
+  );
   const iconEl = document.createElement("span");
   iconEl.dataset.lucide = icon;
   iconWrap.appendChild(iconEl);

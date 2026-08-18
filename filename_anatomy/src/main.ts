@@ -11,6 +11,7 @@ import {
   Image,
   Music,
 } from "lucide";
+import { classNames } from "../../src/classNames";
 
 interface FileEntry {
   base: string;
@@ -32,15 +33,32 @@ const files: FileEntry[] = [
 const floor = document.querySelector<HTMLElement>(".floor")!;
 
 const grid = document.createElement("div");
-grid.className = "grid grid-cols-[7rem_11rem_2rem_9rem] grid-rows-[auto_auto_auto] gap-x-1 gap-y-3";
+grid.className = classNames(
+  "grid",
+  "grid-cols-[7rem_11rem_2rem_9rem]",
+  "grid-rows-[auto_auto_auto]",
+  "gap-x-1",
+  "gap-y-3",
+);
 
 function badge(label: string, side: "above" | "below"): HTMLElement {
   const col = document.createElement("div");
   col.className = "anno-col flex flex-col items-center";
 
   const pill = document.createElement("span");
-  pill.className =
-    "anno-pill rounded-full border border-green-300 bg-white px-2.5 py-0.5 text-[11px] font-semibold tracking-wide text-green-700";
+  pill.className = classNames(
+    "anno-pill",
+    "rounded-full",
+    "border",
+    "border-green-300",
+    "bg-white",
+    "px-2.5",
+    "py-0.5",
+    "text-[11px]",
+    "font-semibold",
+    "tracking-wide",
+    "text-green-700",
+  );
   pill.textContent = label;
 
   const tail = document.createElement("div");
@@ -76,17 +94,48 @@ filetypeLabel.classList.add("align-left");
 const blank = (): HTMLElement => document.createElement("div");
 
 const iconWrap = document.createElement("div");
-iconWrap.className =
-  "flex h-16 w-20 items-center justify-center justify-self-center rounded-2xl border-2 border-dashed border-green-300 bg-white text-green-600 [&_svg]:h-9 [&_svg]:w-9 [&_svg]:stroke-current";
+iconWrap.className = classNames(
+  "flex",
+  "h-16",
+  "w-20",
+  "items-center",
+  "justify-center",
+  "justify-self-center",
+  "rounded-2xl",
+  "border-2",
+  "border-dashed",
+  "border-green-300",
+  "bg-white",
+  "text-green-600",
+  "[&_svg]:h-9",
+  "[&_svg]:w-9",
+  "[&_svg]:stroke-current",
+);
 
 const nameEl = document.createElement("span");
 nameEl.className = "self-center truncate font-mono text-lg font-semibold text-slate-800";
 
 const dotEl = document.createElement("span");
-dotEl.className = "self-center text-center font-mono text-2xl font-extrabold text-rose-500";
+dotEl.className = classNames(
+  "self-center",
+  "text-center",
+  "font-mono",
+  "text-2xl",
+  "font-extrabold",
+  "text-rose-500",
+);
 
 const typeEl = document.createElement("span");
-typeEl.className = "self-center justify-self-start min-w-0 truncate font-mono text-lg font-bold text-green-600";
+typeEl.className = classNames(
+  "self-center",
+  "justify-self-start",
+  "min-w-0",
+  "truncate",
+  "font-mono",
+  "text-lg",
+  "font-bold",
+  "text-green-600",
+);
 
 function setFile(entry: FileEntry): void {
   iconWrap.replaceChildren();
