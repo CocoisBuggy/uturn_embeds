@@ -34,15 +34,15 @@ function badge(label: string, side: Side): HTMLElement {
 }
 
 export interface Annotations {
-  filenameLabel: HTMLElement;
-  dotLabel: HTMLElement;
-  filetypeLabel: HTMLElement;
+  filename: HTMLElement;
+  dot: HTMLElement;
+  filetype: HTMLElement;
 }
 
 export function createAnnotations(): Annotations {
-  const filenameLabel = badge("Filename", "above");
-  const dotLabel = badge("Dot", "above");
-  const filetypeLabel = badge("Filetype", "below");
-  filetypeLabel.classList.add("align-left");
-  return { filenameLabel, dotLabel, filetypeLabel };
+  const filename = badge("Filename", "above");
+  const dot = badge("Dot", "above");
+  const filetype = badge("Filetype", "below");
+  filetype.classList.add("align-left");
+  return { filename, dot, filetype };
 }

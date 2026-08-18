@@ -146,7 +146,7 @@ export function createTree(
     }
 
     const pad = document.createElement("div");
-    pad.className = "p-4";
+    pad.className = "flex min-h-full min-w-full flex-col items-center justify-center p-4";
     pad.appendChild(inner);
 
     const scroll = document.createElement("div");

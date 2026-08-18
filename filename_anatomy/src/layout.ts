@@ -1,6 +1,6 @@
 import { createElement } from "lucide";
 import type { Annotations } from "./annotations";
-import type { FileEntry } from "./data";
+import { activeLabel, current, type Label } from "./state";
 
 const BLANK = (): HTMLElement => document.createElement("div");
 
@@ -16,7 +16,8 @@ dotEl.className = "fa-dot";
 const typeEl = document.createElement("span");
 typeEl.className = "fa-type";
 
-function setFile(entry: FileEntry): void {
+export function renderFile(): void {
+  const entry = current.value;
   iconWrap.replaceChildren();
   iconWrap.appendChild(createElement(entry.icon));
   nameEl.textContent = entry.base;
@@ -30,19 +31,18 @@ export interface GridElements {
   nameEl: HTMLElement;
   dotEl: HTMLElement;
   typeEl: HTMLElement;
-  setFile: (entry: FileEntry) => void;
 }
 
 export function createGrid(annotations: Annotations): GridElements {
-  const { filenameLabel, dotLabel, filetypeLabel } = annotations;
+  const { filename, dot, filetype } = annotations;
 
   const grid = document.createElement("div");
   grid.className = "fa-grid";
 
   grid.append(
     BLANK(),
-    filenameLabel,
-    dotLabel,
+    filename,
+    dot,
     BLANK(),
     iconWrap,
     nameEl,
@@ -51,13 +51,15 @@ export function createGrid(annotations: Annotations): GridElements {
     BLANK(),
     BLANK(),
     BLANK(),
-    filetypeLabel,
+    filetype,
   );
 
-  return { grid, iconWrap, nameEl, dotEl, typeEl, setFile };
+  return { grid, iconWrap, nameEl, dotEl, typeEl };
 }
 
-export function bindHover(item: HTMLElement, label: HTMLElement): void {
-  item.addEventListener("mouseenter", () => label.classList.add("hlt"));
-  item.addEventListener("mouseleave", () => label.classList.remove("hlt"));
+export function bindHover(item: HTMLElement, label: Label): void {
+  item.addEventListener("mouseenter", () => (activeLabel.value = label));
+  item.addEventListener("mouseleave", () => {
+    if (activeLabel.value === label) activeLabel.value = null;
+  });
 }
